@@ -1,0 +1,535 @@
+CREATE TABLE A_Cust 
+    (
+     ID NUMERIC (4) NOT NULL , 
+     Start_Date DATE NOT NULL , 
+     End_Date DATE NOT NULL , 
+     Amount NUMERIC (7,2) NOT NULL , 
+     Status CHAR (1) NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer ID' , 'USER' , 'dbo' , 'TABLE' , 'A_Cust' , 'COLUMN' , 'ID' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Policy Start Date' , 'USER' , 'dbo' , 'TABLE' , 'A_Cust' , 'COLUMN' , 'Start_Date' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Policy End Date' , 'USER' , 'dbo' , 'TABLE' , 'A_Cust' , 'COLUMN' , 'End_Date' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Auto Insurance Premium Amount' , 'USER' , 'dbo' , 'TABLE' , 'A_Cust' , 'COLUMN' , 'Amount' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Status (Current or Expired)' , 'USER' , 'dbo' , 'TABLE' , 'A_Cust' , 'COLUMN' , 'Status' 
+GO
+
+ALTER TABLE A_Cust ADD CONSTRAINT A_Cust_PK PRIMARY KEY CLUSTERED (ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Customer 
+    (
+     ID NUMERIC (4) NOT NULL , 
+     First_Name VARCHAR (30) NOT NULL , 
+     Last_Name VARCHAR (30) NOT NULL , 
+     Address VARCHAR (50) NOT NULL , 
+     Gender CHAR (1) , 
+     Marital_Status CHAR (1) NOT NULL , 
+     Type VARCHAR (1) NOT NULL 
+    )
+GO 
+
+
+ALTER TABLE Customer 
+    ADD CONSTRAINT CH_INH_Customer 
+    CHECK ( Type IN ('A', 'H') ) 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer ID' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'ID' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer's First Name' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'First_Name' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer's Last Name' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'Last_Name' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer's Address' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'Address' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer's Gender' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'Gender' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer's Marital Status' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'Marital_Status' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer Type' , 'USER' , 'dbo' , 'TABLE' , 'Customer' , 'COLUMN' , 'Type' 
+GO
+
+ALTER TABLE Customer ADD CONSTRAINT Customer_PK PRIMARY KEY CLUSTERED (ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE Driver 
+    (
+     License NUMERIC (5) NOT NULL , 
+     First_Name VARCHAR (30) NOT NULL , 
+     Last_Name VARCHAR (30) NOT NULL , 
+     Birth_Date DATE NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Driver's License Number' , 'USER' , 'dbo' , 'TABLE' , 'Driver' , 'COLUMN' , 'License' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Driver's First Name' , 'USER' , 'dbo' , 'TABLE' , 'Driver' , 'COLUMN' , 'First_Name' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Driver's Last Name' , 'USER' , 'dbo' , 'TABLE' , 'Driver' , 'COLUMN' , 'Last_Name' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Driver's Birth Date' , 'USER' , 'dbo' , 'TABLE' , 'Driver' , 'COLUMN' , 'Birth_Date' 
+GO
+
+ALTER TABLE Driver ADD CONSTRAINT Driver_PK PRIMARY KEY CLUSTERED (License)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE H_Cust 
+    (
+     ID NUMERIC (4) NOT NULL , 
+     Start_Date DATE NOT NULL , 
+     End_Date DATE NOT NULL , 
+     Amount NUMERIC (7,2) NOT NULL , 
+     Status CHAR (1) NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Customer ID' , 'USER' , 'dbo' , 'TABLE' , 'H_Cust' , 'COLUMN' , 'ID' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Policy Start Date' , 'USER' , 'dbo' , 'TABLE' , 'H_Cust' , 'COLUMN' , 'Start_Date' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Policy End Date' , 'USER' , 'dbo' , 'TABLE' , 'H_Cust' , 'COLUMN' , 'End_Date' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Home Insurance Premium Amount' , 'USER' , 'dbo' , 'TABLE' , 'H_Cust' , 'COLUMN' , 'Amount' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Status (Current or Expired)' , 'USER' , 'dbo' , 'TABLE' , 'H_Cust' , 'COLUMN' , 'Status' 
+GO
+
+ALTER TABLE H_Cust ADD CONSTRAINT H_Cust_PK PRIMARY KEY CLUSTERED (ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE HInsured 
+    (
+     H_ID NUMERIC (5) NOT NULL , 
+     PDate DATE NOT NULL , 
+     Value NUMERIC (9,2) NOT NULL , 
+     Area NUMERIC (7) NOT NULL , 
+     Type VARCHAR (20) NOT NULL , 
+     Auto_Fire BIT NOT NULL , 
+     HSecurity BIT NOT NULL , 
+     Pool CHAR (1) , 
+     Basement BIT NOT NULL , 
+     ID NUMERIC (4) NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Home ID' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'H_ID' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Purchased Date' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'PDate' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Purchased Value' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'Value' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Area of House in Sqft' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'Area' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Type of House' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'Type' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Auto Fire Notification' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'Auto_Fire' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Home Security' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'HSecurity' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Swimming Pool?' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'Pool' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Basement?' , 'USER' , 'dbo' , 'TABLE' , 'HInsured' , 'COLUMN' , 'Basement' 
+GO
+
+ALTER TABLE HInsured ADD CONSTRAINT HInsured_PK PRIMARY KEY CLUSTERED (H_ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE HInvoices 
+    (
+     HIn_ID NUMERIC (4) NOT NULL , 
+     PDue DATE NOT NULL , 
+     Amount NUMERIC (7,2) NOT NULL , 
+     H_ID NUMERIC (5) NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Invoice ID' , 'USER' , 'dbo' , 'TABLE' , 'HInvoices' , 'COLUMN' , 'HIn_ID' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Due Date' , 'USER' , 'dbo' , 'TABLE' , 'HInvoices' , 'COLUMN' , 'PDue' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Amount to be paid' , 'USER' , 'dbo' , 'TABLE' , 'HInvoices' , 'COLUMN' , 'Amount' 
+GO
+
+ALTER TABLE HInvoices ADD CONSTRAINT HInvoices_PK PRIMARY KEY CLUSTERED (HIn_ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE HPayments 
+    (
+     P_ID NUMERIC (4) NOT NULL , 
+     Date DATE NOT NULL , 
+     Method VARCHAR (20) NOT NULL , 
+     HIn_ID NUMERIC (4) NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Payment ID' , 'USER' , 'dbo' , 'TABLE' , 'HPayments' , 'COLUMN' , 'P_ID' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Payment Date' , 'USER' , 'dbo' , 'TABLE' , 'HPayments' , 'COLUMN' , 'Date' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Method (PayPal/Credit/Debit/Check)' , 'USER' , 'dbo' , 'TABLE' , 'HPayments' , 'COLUMN' , 'Method' 
+GO
+
+ALTER TABLE HPayments ADD CONSTRAINT HPayments_PK PRIMARY KEY CLUSTERED (P_ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE VIns_and_Dr 
+    (
+     VIN NUMERIC (4) NOT NULL , 
+     License NUMERIC (5) NOT NULL 
+    )
+GO
+
+ALTER TABLE VIns_and_Dr ADD CONSTRAINT VIns_and_Dr_PK PRIMARY KEY CLUSTERED (VIN, License)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE VInsured 
+    (
+     VIN NUMERIC (4) NOT NULL , 
+     MMY VARCHAR (40) NOT NULL , 
+     Status CHAR (1) NOT NULL , 
+     ID NUMERIC (4) NOT NULL 
+    )
+GO 
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Vehicle Identification Number' , 'USER' , 'dbo' , 'TABLE' , 'VInsured' , 'COLUMN' , 'VIN' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Model/Make/Year' , 'USER' , 'dbo' , 'TABLE' , 'VInsured' , 'COLUMN' , 'MMY' 
+GO
+
+
+
+EXEC sp_addextendedproperty 'MS_Description' , 'Status (L/F/O)' , 'USER' , 'dbo' , 'TABLE' , 'VInsured' , 'COLUMN' , 'Status' 
+GO
+
+ALTER TABLE VInsured ADD CONSTRAINT VInsured_PK PRIMARY KEY CLUSTERED (VIN)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE VInvoices 
+    (
+     Vin_ID NUMERIC (4) NOT NULL , 
+     PDue DATE NOT NULL , 
+     Amount NUMERIC (7,2) NOT NULL , 
+     VIN NUMERIC (4) NOT NULL 
+    )
+GO
+
+ALTER TABLE VInvoices ADD CONSTRAINT VInvoices_PK PRIMARY KEY CLUSTERED (Vin_ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE VPayments 
+    (
+     P_ID NUMERIC (4) NOT NULL , 
+     Date DATE NOT NULL , 
+     Method VARCHAR (20) NOT NULL , 
+     Vin_ID NUMERIC (4) NOT NULL 
+    )
+GO
+
+ALTER TABLE VPayments ADD CONSTRAINT VPayments_PK PRIMARY KEY CLUSTERED (P_ID)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+ALTER TABLE A_Cust 
+    ADD CONSTRAINT A_Cust_Customer_FK FOREIGN KEY 
+    ( 
+     ID
+    ) 
+    REFERENCES Customer 
+    ( 
+     ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE H_Cust 
+    ADD CONSTRAINT H_Cust_Customer_FK FOREIGN KEY 
+    ( 
+     ID
+    ) 
+    REFERENCES Customer 
+    ( 
+     ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE HInsured 
+    ADD CONSTRAINT HInsured_H_Cust_FK FOREIGN KEY 
+    ( 
+     ID
+    ) 
+    REFERENCES H_Cust 
+    ( 
+     ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE HInvoices 
+    ADD CONSTRAINT HInvoices_HInsured_FK FOREIGN KEY 
+    ( 
+     H_ID
+    ) 
+    REFERENCES HInsured 
+    ( 
+     H_ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE HPayments 
+    ADD CONSTRAINT HPayments_HInvoices_FK FOREIGN KEY 
+    ( 
+     HIn_ID
+    ) 
+    REFERENCES HInvoices 
+    ( 
+     HIn_ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE VIns_and_Dr 
+    ADD CONSTRAINT VIns_and_Dr_Driver_FK FOREIGN KEY 
+    ( 
+     License
+    ) 
+    REFERENCES Driver 
+    ( 
+     License 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE VIns_and_Dr 
+    ADD CONSTRAINT VIns_and_Dr_VInsured_FK FOREIGN KEY 
+    ( 
+     VIN
+    ) 
+    REFERENCES VInsured 
+    ( 
+     VIN 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE VInsured 
+    ADD CONSTRAINT VInsured_A_Cust_FK FOREIGN KEY 
+    ( 
+     ID
+    ) 
+    REFERENCES A_Cust 
+    ( 
+     ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE VInvoices 
+    ADD CONSTRAINT VInvoices_VInsured_FK FOREIGN KEY 
+    ( 
+     VIN
+    ) 
+    REFERENCES VInsured 
+    ( 
+     VIN 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE VPayments 
+    ADD CONSTRAINT VPayments_VInvoices_FK FOREIGN KEY 
+    ( 
+     Vin_ID
+    ) 
+    REFERENCES VInvoices 
+    ( 
+     Vin_ID 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+
+
+-- Oracle SQL Developer Data Modeler Summary Report: 
+-- 
+-- CREATE TABLE                            11
+-- CREATE INDEX                             0
+-- ALTER TABLE                             22
+-- CREATE VIEW                              0
+-- ALTER VIEW                               0
+-- CREATE PACKAGE                           0
+-- CREATE PACKAGE BODY                      0
+-- CREATE PROCEDURE                         0
+-- CREATE FUNCTION                          0
+-- CREATE TRIGGER                           0
+-- ALTER TRIGGER                            0
+-- CREATE DATABASE                          0
+-- CREATE DEFAULT                           0
+-- CREATE INDEX ON VIEW                     0
+-- CREATE ROLLBACK SEGMENT                  0
+-- CREATE ROLE                              0
+-- CREATE RULE                              0
+-- CREATE SCHEMA                            0
+-- CREATE SEQUENCE                          0
+-- CREATE PARTITION FUNCTION                0
+-- CREATE PARTITION SCHEME                  0
+-- 
+-- DROP DATABASE                            0
+-- 
+-- ERRORS                                   0
+-- WARNINGS                                 0
