@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ceb2b82cee048a0821aa5e1a8835068" Name="Diagram1">
+        <EntityTypeShape EntityType="dbms2Model.CreditCard" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.Customer" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.Driver" Width="1.5" PointX="8.25" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.HomeInsured" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.Insurance" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.InsuranceType" Width="1.5" PointX="3.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.InsuredVehicle_Has_Driver" Width="1.5" PointX="11.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.Invoice" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.Paypal" Width="1.5" PointX="10.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.Status" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.User" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbms2Model.VehicleInsured" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="dbms2Model.FK__CreditCar__Invoi__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__Customers__UserI__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__InsuredVe__Drive__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__HomeInsur__Insur__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__Insurance__Insur__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__Insurance__Statu__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__Insurance__UserI__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__Invoice__Insuran__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__VehicleIn__Insur__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__InsuredVe__Insur__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="dbms2Model.FK__Paypal__InvoiceI__5629CD9C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
