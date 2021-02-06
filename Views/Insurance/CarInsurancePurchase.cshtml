@@ -1,0 +1,71 @@
+﻿@model InsuranceProject.Models.VehicleInsurancePurchaseViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="page-container">
+        @Html.HiddenFor(model => model.InsuranceId)
+        <div class="blank">
+            <h1 class="title">Purchase Car Insurance</h1>
+            <img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+        </div>
+        <p class="container-message">
+            Login for content, if your dont have account, create one.
+        </p>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Model)<br />
+            @Html.ValidationMessageFor(Model => Model.Model, "", new { @class = "text-danger" })
+            <div class="input-group form-group textbox-input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.Model, new { @class = "form-control", @placeholder = "Vehicle Model" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Brand)<br />
+            @Html.ValidationMessageFor(Model => Model.Brand, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-key"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.Brand, new { @class = "form-control", @placeholder = "Vehicle Brand" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year)<br />
+            @Html.ValidationMessageFor(Model => Model.Year, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-key"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.Year, new { @class = "form-control", @placeholder = "Vehicle Year" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status)<br />
+            @Html.ValidationMessageFor(Model => Model.Status, "", new { @class = "text-danger" })
+            <div class="input-group form-group selectbox-input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @Html.DropDownListFor(model => model.Status, Model.StatusList, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">
+                Next Step
+                <i class="fa fa-arrow-circle-right fa-fw"></i>
+            </button>
+        </div>
+    </div>
+}
+    <script>
+        $(document).ready(function () {
+            $(".selectbox-input-group").css({
+                'width': ($(".textbox-input-group").width() + 'px')
+            });
+        });
+    </script>

@@ -1,0 +1,114 @@
+﻿@model InsuranceProject.Models.RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container">
+        <div class="blank">
+            <h1 class="title">Register</h1>
+            <img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+        </div>
+        <p class="container-message">
+            Register here to get access!
+        </p>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName)<br />
+            @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "text-danger" })
+            <div class="input-group form-group textbox-input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", @placeholder = "First Name", @id = "firstname-textbox" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName)<br />
+            @Html.ValidationMessageFor(Model => Model.LastName, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender)<br />
+            @Html.ValidationMessageFor(Model => Model.Gender, "", new { @class = "text-danger" })
+            <div class="input-group form-group selectbox-input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @Html.DropDownListFor(model => model.Gender, Model.GenderList, new { @class = "form-control", @id = "gender-selectbox" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address)<br />
+            @Html.ValidationMessageFor(Model => Model.Address, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-address-book"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.Address, new { @class = "form-control", @placeholder = "Address" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Marital_Status)<br />
+            @Html.ValidationMessageFor(Model => Model.Marital_Status, "", new { @class = "text-danger" })
+            <div class="input-group form-group selectbox-input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                @Html.DropDownListFor(model => model.Marital_Status, Model.MarritalStatusList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)<br />
+            @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password)<br />
+            @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-key"></i>
+                </span>
+                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword)<br />
+            @Html.ValidationMessageFor(Model => Model.ConfirmPassword, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-check"></i>
+                </span>
+                @Html.PasswordFor(Model => Model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">
+            Sign in
+            <i class="fa fa-arrow-circle-right fa-fw"></i>
+            </button>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            Already have an account? Click<a style="padding-left: 5px;" href="/Account/Login">here</a>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".selectbox-input-group").css({
+            'width': ($(".textbox-input-group").width() + 'px')
+        });
+    });
+</script>

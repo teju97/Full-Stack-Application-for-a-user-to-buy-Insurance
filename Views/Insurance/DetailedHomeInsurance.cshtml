@@ -1,0 +1,117 @@
+﻿@model InsuranceProject.Models.DetailedHomeInsuranceViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container">
+        <div class="blank">
+            <h1 class="title">Home Insurance</h1>
+            <img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+        </div>
+        <p class="container-message">
+            Detailed Home Insurance View
+        </p>
+        <div class="insurance-detailed py-4">
+            @Html.HiddenFor(model => model.InsuranceId)
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-transparent text-center">
+                                <img class="profile_img" src="@Url.Content("~/Content/Images/homeinsurance.jpg")">
+                                <h3>Home insurance number: @Model.InsuranceId</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0"><strong class="pr-1">Start date: </strong>@Model.StartDate</p>
+                                <p class="mb-0"><strong class="pr-1">End date: </strong>@Model.EndDate</p>
+                                <p class="mb-0"><strong class="pr-1">Status: </strong>@Model.Status</p>
+                                @if (Model.Status == "Inactive" && Session["admin"] == null)
+                                {
+                                    <button type="submit" class="btn btn-default" style="width:100%;">
+                                        Pay now
+                                        <i class="fa fa-dollar-sign"></i>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-transparent border-0">
+                                <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Houses insured:</h3>
+                            </div>
+                            <div class="card-body pt-0">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Purchase date</th>
+                                        <th>Purchase value</th>
+                                        <th>Home Area</th>
+                                        <th>Type</th>
+                                        <th>Auto-fire</th>
+                                        <th>Security</th>
+                                        <th>Basement</th>
+                                        <th>Pool</th>
+                                    </tr>
+                                    @foreach (var item in Model.HomesInsured)
+                                    {
+                                        <tr>
+                                            <td>@item.PurchaseDate</td>
+                                            <td>@item.PurchaseValue</td>
+                                            <td>@item.HomeArea</td>
+                                            <td>@item.Type</td>
+                                            <td>@item.AutoFire</td>
+                                            <td>@item.Security</td>
+                                            <td>@item.Basement</td>
+                                            <td>@item.Pool</td>
+
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                    <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Invoice</h3>
+                </div>
+                <div class="card-body pt-0">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="30%">Invoice number: </th>
+                            <td width="2%">:</td>
+                            <td>@Model.InvoiceID</td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Payment due to: </th>
+                            <td width="2%">:</td>
+                            <td>@Model.DueDate</td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Price</th>
+                            <td width="2%">:</td>
+                            <td>@Model.Price</td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Payment status:</th>
+                            <td width="2%">:</td>
+                            @if (Model.IsPaid == true)
+                            {
+                                <td>Paid</td>
+                            }
+                            else
+                            {
+                                <td>Not paid</td>
+                            }
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

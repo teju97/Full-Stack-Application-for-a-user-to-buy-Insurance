@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbms2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CreditCard">
+    <Key>
+      <PropertyRef Name="CreditCardId" />
+    </Key>
+    <Property Name="CreditCardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardHolder" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CardExpiry" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="CardNumber" Type="bigint" Nullable="false" />
+    <Property Name="CVC" Type="int" Nullable="false" />
+    <Property Name="PaymentDate" Type="date" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Marital_Status" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="2" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="DriverId" />
+    </Key>
+    <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BirthDate" Type="date" Nullable="false" />
+    <Property Name="LicenceNumber" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="HomeInsured">
+    <Key>
+      <PropertyRef Name="HomeInsuredID" />
+    </Key>
+    <Property Name="HomeInsuredID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PurchaseDate" Type="date" Nullable="false" />
+    <Property Name="PurchaseValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HomeArea" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="AutoFire" Type="bit" Nullable="false" />
+    <Property Name="Security" Type="bit" Nullable="false" />
+    <Property Name="Basement" Type="bit" Nullable="false" />
+    <Property Name="Pool" Type="varchar" MaxLength="1" />
+    <Property Name="InsuranceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Insurance">
+    <Key>
+      <PropertyRef Name="InsuranceID" />
+    </Key>
+    <Property Name="InsuranceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="InsuranceTypeId" Type="int" Nullable="false" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InsuranceType">
+    <Key>
+      <PropertyRef Name="InsuranceTypeID" />
+    </Key>
+    <Property Name="InsuranceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InsuredVehicle_Has_Driver">
+    <Key>
+      <PropertyRef Name="InsuredVehicleHasDriverId" />
+    </Key>
+    <Property Name="InsuredVehicleId" Type="int" Nullable="false" />
+    <Property Name="DriverId" Type="int" Nullable="false" />
+    <Property Name="InsuredVehicleHasDriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DueDate" Type="date" Nullable="false" />
+    <Property Name="InsuranceId" Type="int" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Paypal">
+    <Key>
+      <PropertyRef Name="PaypalId" />
+    </Key>
+    <Property Name="PaypalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaypalEmail" Type="varchar" MaxLength="100" />
+    <Property Name="PaymentDate" Type="date" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="First_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VehicleInsured">
+    <Key>
+      <PropertyRef Name="VehicleInsured" />
+    </Key>
+    <Property Name="VehicleInsured" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="InsuranceId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CreditCar__Invoi__4D94879B">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+    <End Role="CreditCard" Type="Self.CreditCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="CreditCard">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customers__UserI__4E88ABD4">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HomeInsur__Insur__4F7CD00D">
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="1" />
+    <End Role="HomeInsured" Type="Self.HomeInsured" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Insurance">
+        <PropertyRef Name="InsuranceID" />
+      </Principal>
+      <Dependent Role="HomeInsured">
+        <PropertyRef Name="InsuranceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Insurance__Insur__5070F446">
+    <End Role="InsuranceType" Type="Self.InsuranceType" Multiplicity="1" />
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InsuranceType">
+        <PropertyRef Name="InsuranceTypeID" />
+      </Principal>
+      <Dependent Role="Insurance">
+        <PropertyRef Name="InsuranceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Insurance__Statu__5165187F">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="Insurance">
+        <PropertyRef Name="StatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Insurance__UserI__52593CB8">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Insurance">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InsuredVe__Drive__534D60F1">
+    <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+    <End Role="InsuredVehicle_Has_Driver" Type="Self.InsuredVehicle_Has_Driver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverId" />
+      </Principal>
+      <Dependent Role="InsuredVehicle_Has_Driver">
+        <PropertyRef Name="DriverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InsuredVe__Insur__5441852A">
+    <End Role="VehicleInsured" Type="Self.VehicleInsured" Multiplicity="1" />
+    <End Role="InsuredVehicle_Has_Driver" Type="Self.InsuredVehicle_Has_Driver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleInsured">
+        <PropertyRef Name="VehicleInsured" />
+      </Principal>
+      <Dependent Role="InsuredVehicle_Has_Driver">
+        <PropertyRef Name="InsuredVehicleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__Insuran__5535A963">
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Insurance">
+        <PropertyRef Name="InsuranceID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="InsuranceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Paypal__InvoiceI__5629CD9C">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+    <End Role="Paypal" Type="Self.Paypal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="Paypal">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VehicleIn__Insur__571DF1D5">
+    <End Role="Insurance" Type="Self.Insurance" Multiplicity="1" />
+    <End Role="VehicleInsured" Type="Self.VehicleInsured" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Insurance">
+        <PropertyRef Name="InsuranceID" />
+      </Principal>
+      <Dependent Role="VehicleInsured">
+        <PropertyRef Name="InsuranceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbms2ModelStoreContainer">
+    <EntitySet Name="CreditCard" EntityType="Self.CreditCard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HomeInsured" EntityType="Self.HomeInsured" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Insurance" EntityType="Self.Insurance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsuranceType" EntityType="Self.InsuranceType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InsuredVehicle_Has_Driver" EntityType="Self.InsuredVehicle_Has_Driver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paypal" EntityType="Self.Paypal" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleInsured" EntityType="Self.VehicleInsured" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CreditCar__Invoi__4D94879B" Association="Self.FK__CreditCar__Invoi__4D94879B">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="CreditCard" EntitySet="CreditCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customers__UserI__4E88ABD4" Association="Self.FK__Customers__UserI__4E88ABD4">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HomeInsur__Insur__4F7CD00D" Association="Self.FK__HomeInsur__Insur__4F7CD00D">
+      <End Role="Insurance" EntitySet="Insurance" />
+      <End Role="HomeInsured" EntitySet="HomeInsured" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Insurance__Insur__5070F446" Association="Self.FK__Insurance__Insur__5070F446">
+      <End Role="InsuranceType" EntitySet="InsuranceType" />
+      <End Role="Insurance" EntitySet="Insurance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Insurance__Statu__5165187F" Association="Self.FK__Insurance__Statu__5165187F">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Insurance" EntitySet="Insurance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Insurance__UserI__52593CB8" Association="Self.FK__Insurance__UserI__52593CB8">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Insurance" EntitySet="Insurance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InsuredVe__Drive__534D60F1" Association="Self.FK__InsuredVe__Drive__534D60F1">
+      <End Role="Driver" EntitySet="Driver" />
+      <End Role="InsuredVehicle_Has_Driver" EntitySet="InsuredVehicle_Has_Driver" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InsuredVe__Insur__5441852A" Association="Self.FK__InsuredVe__Insur__5441852A">
+      <End Role="VehicleInsured" EntitySet="VehicleInsured" />
+      <End Role="InsuredVehicle_Has_Driver" EntitySet="InsuredVehicle_Has_Driver" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__Insuran__5535A963" Association="Self.FK__Invoice__Insuran__5535A963">
+      <End Role="Insurance" EntitySet="Insurance" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Paypal__InvoiceI__5629CD9C" Association="Self.FK__Paypal__InvoiceI__5629CD9C">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="Paypal" EntitySet="Paypal" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VehicleIn__Insur__571DF1D5" Association="Self.FK__VehicleIn__Insur__571DF1D5">
+      <End Role="Insurance" EntitySet="Insurance" />
+      <End Role="VehicleInsured" EntitySet="VehicleInsured" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

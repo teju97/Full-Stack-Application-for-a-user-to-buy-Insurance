@@ -1,0 +1,137 @@
+﻿@model InsuranceProject.Models.InsuredDriversViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function addCurrentDriver() {
+        $valuesValid = true;
+        $firstname = $("#FirstName").val();
+        if ($firstname === "") {
+            $("#firstname-validation").text("Please, enter the first name.");
+            $valuesValid = false;
+        }
+        $lastname = $("#LastName").val();
+        if ($lastname === "") {
+            $("#lastname-validation").text("Please, enter the last name.");
+            $valuesValid = false;
+        }
+        $birthdate = $("#Birthdate").val();
+        if ($birthdate === "") {
+            $("#birthdate-validation").text("Please, enter the date of birth in format dd/MM/yyyy.");
+            $valuesValid = false;
+        }
+        $licence = $("#Licence").val();
+        if ($licence === "") {
+            $("#licence-validation").text("Please, enter the licence number.");
+            $valuesValid = false;
+        }
+        if ($valuesValid) {
+            $insuranceId = '@Model.InsuranceID';
+            $vehicleId = '@Model.VehicleId';
+            $submitMethod = "AddMore";
+            $json = "{\"idvm\":{\"FirstName\":\"" + $firstname + "\",\"LastName\":\"" + $lastname + "\", \"Birthdate\":\"" + $birthdate + "\", \"Licence\":\"" + $licence + "\", \"VehicleId\":\"" + $vehicleId + "\", \"InsuranceID\":\"" + $insuranceId + "\", \"SubmitMethod\":\"" + $submitMethod + "\"}}";
+            $id = '@Model.InsuranceID';
+            $serviceURL = '/Insurance/AddInsuredDrivers/' + $id + '?vehicle_id=' + $vehicleId;
+            $.ajax({
+            type: "POST",
+            url: $serviceURL,
+            data: $json,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: successFunc,
+            error: errorFunc
+            });
+        }
+        function successFunc(data, status) {
+            $("#FirstName").val("");
+            $("#LastName").val("");
+            $("#Birthdate").val("");
+            $("#Licence").val("");
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+    }
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container">
+        <div class="blank">
+            <h1 class="title">Add a Driver</h1>
+            <img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+        </div>
+        @Html.HiddenFor(model => model.VehicleId)
+        @Html.HiddenFor(model => model.InsuranceID)
+        <p class="container-message">
+            Please, add a driver informations for insurance number <span id="insurance-id">@Model.InsuranceID</span>
+        </p>
+        <div class="car-insurance-purchase-container" style="border: solid 1px; width:70%;">
+            <div class="home-insurance-purchase-item" style="width:50%; margin:0 auto;">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName)<br />
+                    @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "text-danger", id = "firstname-validation" })
+                    <div class="input-group form-group textbox-input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        @Html.TextBoxFor(Model => Model.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName)<br />
+                    @Html.ValidationMessageFor(Model => Model.LastName, "", new { @class = "text-danger", id = "lastname-validation" })
+                    <div class="input-group form-group textbox-input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        @Html.TextBoxFor(Model => Model.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Birthdate)<br />
+                    @Html.ValidationMessageFor(Model => Model.Birthdate, "", new { @class = "text-danger", id = "birthdate-validation" })
+                    <div class="input-group form-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                        @Html.TextBoxFor(Model => Model.Birthdate, new { @class = "form-control", @placeholder = "dd/mm/yyyy" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Licence)<br />
+                    @Html.ValidationMessageFor(Model => Model.Licence, "", new { @class = "text-danger", id = "licence-validation" })
+                    <div class="input-group form-group">
+                        <span class="input-group-addon">
+                            <i class="fa-id-badge"></i>
+                        </span>
+                        @Html.TextBoxFor(Model => Model.Licence, new { @class = "form-control", @placeholder = "Licence" })
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.InsuranceID);
+            <div class="button-container" style="margin-top: 25px;">
+                <div class="form-group" style="display: inline-block; width:49%;">
+                    <button type="button" class="btn btn-default" onclick="addCurrentDriver();" style="width:100%;">
+                        Add another driver
+                        <i class="fa fa-arrow-circle-right fa-fw"></i>
+                    </button>
+                </div>
+                <div class="form-group" style="display: inline-block; width:49%;">
+                    <button type="submit" class="btn btn-default" style="width:100%;">
+                        Finish!
+                        <i class="fa fa-arrow-circle-right fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".selectbox-input-group").css({
+            'width': ($(".textbox-input-group").width() + 'px')
+        });
+    });
+</script>

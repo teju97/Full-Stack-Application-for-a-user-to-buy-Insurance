@@ -1,0 +1,55 @@
+﻿@model InsuranceProject.Models.LoginViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container">
+        <div class="blank">
+            <h1 class="title">Login</h1>
+            <img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+        </div>
+        <p class="container-message">
+            Login for content, if your dont have account, create one.
+        </p>
+        @if (Model.ErrorMessage != "")
+        {
+            <p class="container-message" style="color: red; margin-top:30px;">
+                @Model.ErrorMessage;
+            </p>
+        }
+        <p class="container-message"></p>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)<br />
+            @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)<br />
+            @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-key"></i>
+                </span>
+                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">
+                Login
+                <i class="fa fa-arrow-circle-right fa-fw"></i>
+            </button>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            Dont have an account? Click<a style="padding-left: 5px;" href="/Account/Register">here</a>
+        </div>
+    </div>
+}
+

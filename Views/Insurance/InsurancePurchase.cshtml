@@ -1,0 +1,66 @@
+﻿@model InsuranceProject.Models.PurchaseInsuranceViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page-container">
+        <div class="blank">
+            <h1 class="title">Insurance Purchase</h1>
+            <img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+        </div>
+        <p class="container-message">
+            Purchase an insurance
+        </p>
+        @if (Model.ErrorMessage != "")
+        {
+            <p class="container-message" style="margin-top:30px;color:red;">
+                @Model.ErrorMessage
+            </p>
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.InsuranceType)
+            @Html.ValidationMessageFor(Model => Model.InsuranceType, "", new { @class = "text-danger" })
+            <div class="input-group form-group textbox-input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-search-dollar"></i>
+                </span>
+                @Html.DropDownListFor(model => model.InsuranceType, Model.InsuranceTypeList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate)<br />
+            @Html.ValidationMessageFor(Model => Model.StartDate, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.StartDate, new { @class = "form-control", @placeholder = "dd/mm/yyyy" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate)<br />
+            @Html.ValidationMessageFor(Model => Model.EndDate, "", new { @class = "text-danger" })
+            <div class="input-group form-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                @Html.TextBoxFor(Model => Model.EndDate, new { @class = "form-control", @placeholder = "dd/mm/yyyy" })
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-default">
+                Next Step
+                <i class="fa fa-arrow-circle-right fa-fw"></i>
+            </button>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $(".selectbox-input-group").css({
+            'width': ($(".textbox-input-group").width() + 'px')
+        });
+    });
+</script>

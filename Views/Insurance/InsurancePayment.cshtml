@@ -1,0 +1,190 @@
+﻿@model InsuranceProject.Models.InsurancePaymentViewModel
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+	<script>
+    function setPaypalPaymentVisible() {
+        $("#bankcard-container").css("display", "none");
+        $("#paypal-container").css("display", "block");
+        $("#payment-method").text("Paypal payment");
+    }
+
+    function setBankCardPaymentVisible() {
+        $("#bankcard-container").css("display", "block");
+        $("#paypal-container").css("display", "none");
+        $("#payment-method").text("Bank card payment");
+    }
+
+    function doValidation() {
+        if($("#payment-method").text() === "Paypal payment") {
+            $email = $("#PaypalMail").val();
+            $valuesValid = true;
+            if ($email === "") {
+                $("#email-validation").text("Please, enter your paypal email");
+                valuesValid = false;
+            }
+			if ($valuesValid) {
+				$("#PaymentType").val("paypal");
+				$("#paymentform").submit();
+            }
+        }
+
+        if ($("#payment-method").text() === "Bank card payment") {
+            $valuesValid = true;
+            $cardholder = $("#CardHolder").val();
+            if ($cardholder === "") {
+                $("#cardholder-validation").text("Please, enter the cardholder value");
+                $valuesValid = false;
+            }
+            $cardNumber = $("#CardNumber").val();
+            if ($cardNumber === "") {
+                $("#cardnumber-validation").text("Please, enter the card number.");
+                $valuesValid = false;
+            }
+            $cvc = $("#CVC").val();
+            if ($cvc === "") {
+                $("#cvc-validation").text("Please, enter CVC value.");
+                $valuesValid = false;
+            }
+            $cardexpiry = $("#CardExpiry").val();
+            if ($cardexpiry === "") {
+                $("#expiry-validation").text("Please, enter card expiry date in format mm/yy.");
+                $valuesValid = false;
+            }
+            if ($valuesValid) {
+                $("#PaymentType").val("paypal");
+				$("#paymentform").submit();
+            }
+        }
+    }
+	</script>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "paymentform" }))
+{
+	@Html.AntiForgeryToken()
+	<div class="page-container">
+		<div class="blank">
+			<h1 class="title">Insurance Payment</h1>
+			<img src="@Url.Content("~/Content/Images/login.jpg")" alt="Image">
+		</div>
+		<p class="container-message">
+			Insurance payment
+		</p>
+		<div class="col-lg-8">
+			<div class="card shadow-sm">
+				<div class="card-header bg-transparent border-0">
+					<h3 class="mb-0"><i class="far fa-clone pr-1"></i>Payment</h3>
+				</div>
+				<div class="card-body pt-0">
+					<table class="table table-bordered">
+						<tr>
+							<th width="30%">Insurance number: </th>
+							<td width="2%">:</td>
+							<td id="insuranceid">@Model.InsuranceId</td>
+						</tr>
+						<tr>
+							<th width="30%">Insurance type: </th>
+							<td width="2%">:</td>
+							<td id="insuranceid">@Model.InsuranceType</td>
+						</tr>
+						<tr>
+							<th width="30%">Start date: </th>
+							<td width="2%">:</td>
+							<td>@Model.StartDate</td>
+						</tr>
+						<tr>
+							<th width="30%">End date: </th>
+							<td width="2%">:</td>
+							<td>@Model.EndDate</td>
+						</tr>
+						<tr>
+							<th width="30%">Price</th>
+							<td width="2%">:</td>
+							<td>@Model.Price</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		@Html.HiddenFor(model => model.InsuranceId);
+		@Html.HiddenFor(model => model.InsuranceType);
+		@Html.HiddenFor(model => model.PaymentType);
+		<div style="width:25%; margin:0 auto; margin-top:50px;">
+			<button type="button" class="btn btn-primary" onclick="setBankCardPaymentVisible();">Bank card</button>
+			<button type="button" class="btn btn-primary" onclick="setPaypalPaymentVisible();">Paypal</button>
+		</div>
+		<div style="width:50%; margin: 0 auto;">
+			<div style="width:75%;margin-top: 75px;">
+				<h3 id="payment-method" style="text-align: center;">Bank card payment</h3>
+			</div>
+			<div id="bankcard-container" style="width:75%; margin: 0 auto;margin-top:50px;">
+				<div class="form-group">
+					@Html.LabelFor(model => model.CardHolder)<br />
+					@Html.ValidationMessageFor(Model => Model.CardHolder, "", new { @class = "text-danger", id = "cardholder-validation" })
+					<div class="input-group form-group">
+						<span class="input-group-addon">
+							<i class="fa fa-key"></i>
+						</span>
+						@Html.TextBoxFor(Model => Model.CardHolder, new { @class = "form-control", @placeholder = "CardHolder" })
+					</div>
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.CardNumber)<br />
+					@Html.ValidationMessageFor(Model => Model.CardNumber, "", new { @class = "text-danger", id = "cardnumber-validation" })
+					<div class="input-group form-group">
+						<span class="input-group-addon">
+							<i class="fa fa-key"></i>
+						</span>
+						@Html.TextBoxFor(Model => Model.CardNumber, new { @class = "form-control", @placeholder = "Card number" })
+					</div>
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.CVC)<br />
+					@Html.ValidationMessageFor(Model => Model.CVC, "", new { @class = "text-danger", id = "cvc-validation" })
+					<div class="input-group form-group">
+						<span class="input-group-addon">
+							<i class="fa fa-key"></i>
+						</span>
+						@Html.TextBoxFor(Model => Model.CVC, new { @class = "form-control", @placeholder = "CVC" })
+					</div>
+				</div>
+				<div class="form-group">
+					@Html.LabelFor(model => model.CardExpiry)<br />
+					@Html.ValidationMessageFor(Model => Model.CardExpiry, "", new { @class = "text-danger", id = "expiry-validation" })
+					<div class="input-group form-group">
+						<span class="input-group-addon">
+							<i class="fa fa-key"></i>
+						</span>
+						@Html.TextBoxFor(Model => Model.CardExpiry, new { @class = "form-control", @placeholder = "mm/yy" })
+					</div>
+				</div>
+			</div>
+			<div id="paypal-container" style="width:75%; margin: 0 auto;margin-top:50px;">
+				<div class="form-group">
+					@Html.LabelFor(model => model.PaypalMail)<br />
+					@Html.ValidationMessageFor(Model => Model.PaypalMail, "", new { @class = "text-danger", id = "email-validation" })
+					<div class="input-group form-group">
+						<span class="input-group-addon">
+							<i class="fa fa-key"></i>
+						</span>
+						@Html.TextBoxFor(Model => Model.PaypalMail, new { @class = "form-control", @placeholder = "Paypal Email" })
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group" style="width:50%; margin: 0 auto;">
+				<button type="submit" class="btn btn-default" onclick="doValidation();">
+					Pay
+					<i class="fa fa-search-dollar"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+}
+	<script>
+		$(document).ready(function () {
+			$("#bankcard-container").css("display", "block");
+			$("#paypal-container").css("display", "none");
+			$("#payment-method").text("Bank card payment");
+		});
+	</script>
